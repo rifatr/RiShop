@@ -19,13 +19,21 @@ namespace Infra.Data
 
         public async Task<Product> GetProductByIdAsync(int id)
         {
-            var maybeProduct = await _context.Products.FindAsync(id);
+            var maybeProduct =
+                await _context.Products
+                    .Include(p => p.ProductBrand)
+                    .Include(p => p.ProductType)
+                    .FirstOrDefaultAsync(p => p.Id == id);
+
             return maybeProduct is null ? throw new InvalidOperationException($"Product with id {id} not found.") : maybeProduct;
         }
 
         public async Task<IReadOnlyList<Product>> GetProductsAsync()
         {
-            return await _context.Products.ToListAsync();
+            return await _context.Products
+                .Include(p => p.ProductBrand)
+                .Include(p => p.ProductType)
+                .ToListAsync();
         }
 
         public async Task<IReadOnlyList<ProductType>> GetProductTypesAsync()

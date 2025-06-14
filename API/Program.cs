@@ -16,7 +16,7 @@ builder.Services.AddDbContext<StoreContext>(options =>
 
 var app = builder.Build();
 
-// Auto migration of DB
+// Auto migration of DB and data seeding
 using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
@@ -25,6 +25,7 @@ using (var scope = app.Services.CreateScope())
     {
         var context = services.GetRequiredService<StoreContext>();
         await context.Database.MigrateAsync();
+        await StoreContextSeed.SeedAsync(context, loggerFactory);
     }
     catch (Exception ex)
     {
