@@ -1,0 +1,30 @@
+[
+  {
+    "Id": 1,
+    "Name": "Powerbanks"
+  },
+  {
+    "Id": 2,
+    "Name": "Keyboards"
+  },
+  {
+    "Id": 3,
+    "Name": "Monitors"
+  },
+  {
+    "Id": 4,
+    "Name": "Smart Watches"
+  },
+  {
+    "Id": 5,
+    "Name": "Mice"
+  },
+  {
+    "Id": 6,
+    "Name": "Speakers"
+  },
+  {
+    "Id": 7,
+    "Name": "SSDs"
+  }
+]

@@ -1,0 +1,42 @@
+[
+  {
+    "Id": 1,
+    "Name": "Anker"
+  },
+  {
+    "Id": 2,
+    "Name": "Logitech"
+  },
+  {
+    "Id": 3,
+    "Name": "Samsung"
+  },
+  {
+    "Id": 4,
+    "Name": "Apple"
+  },
+  {
+    "Id": 5,
+    "Name": "Corsair"
+  },
+  {
+    "Id": 6,
+    "Name": "Asus"
+  },
+  {
+    "Id": 7,
+    "Name": "Sony"
+  },
+  {
+    "Id": 8,
+    "Name": "Western Digital"
+  },
+  {
+    "Id": 9,
+    "Name": "Razer"
+  },
+  {
+    "Id": 10,
+    "Name": "JBL"
+  }
+]

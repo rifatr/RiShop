@@ -1,0 +1,114 @@
+[
+  {
+    "Name": "Anker PowerCore 20000",
+    "Description": "High-capacity portable charger with fast charging support. Ideal for travel and long commutes.",
+    "Price": 49.99,
+    "PictureUrl": "images/products/pb-anker1.png",
+    "ProductTypeId": 1,
+    "ProductBrandId": 1
+  },
+  {
+    "Name": "Anker PowerCore Slim",
+    "Description": "Sleek 10000mAh powerbank with USB-C and PowerIQ technology.",
+    "Price": 29.99,
+    "PictureUrl": "images/products/pb-anker2.png",
+    "ProductTypeId": 1,
+    "ProductBrandId": 1
+  },
+  {
+    "Name": "Logitech G Pro Mechanical Keyboard",
+    "Description": "Tactile switches, compact layout, and RGB lighting designed for esports professionals.",
+    "Price": 129.99,
+    "PictureUrl": "images/products/kb-logi1.png",
+    "ProductTypeId": 2,
+    "ProductBrandId": 2
+  },
+  {
+    "Name": "Corsair K95 RGB Platinum",
+    "Description": "Mechanical gaming keyboard with macro keys, aluminum frame, and customizable lighting.",
+    "Price": 159.99,
+    "PictureUrl": "images/products/kb-corsair1.png",
+    "ProductTypeId": 2,
+    "ProductBrandId": 5
+  },
+  {
+    "Name": "Samsung Smart Monitor M8",
+    "Description": "4K UHD smart monitor with built-in apps, streaming, and USB-C connectivity.",
+    "Price": 699.99,
+    "PictureUrl": "images/products/mon-samsung1.png",
+    "ProductTypeId": 3,
+    "ProductBrandId": 3
+  },
+  {
+    "Name": "Asus ProArt Display",
+    "Description": "Professional monitor with color accuracy and HDR support for creative professionals.",
+    "Price": 499.99,
+    "PictureUrl": "images/products/mon-asus1.png",
+    "ProductTypeId": 3,
+    "ProductBrandId": 6
+  },
+  {
+    "Name": "Apple Watch Series 9",
+    "Description": "Advanced health tracking, always-on display, and seamless integration with iOS.",
+    "Price": 399.99,
+    "PictureUrl": "images/products/watch-apple1.png",
+    "ProductTypeId": 4,
+    "ProductBrandId": 4
+  },
+  {
+    "Name": "Samsung Galaxy Watch 6",
+    "Description": "Smartwatch with fitness tracking, sleep monitoring, and vibrant AMOLED display.",
+    "Price": 329.99,
+    "PictureUrl": "images/products/watch-samsung1.png",
+    "ProductTypeId": 4,
+    "ProductBrandId": 3
+  },
+  {
+    "Name": "Logitech MX Master 3S",
+    "Description": "Ergonomic wireless mouse with MagSpeed scroll and precise tracking.",
+    "Price": 99.99,
+    "PictureUrl": "images/products/mouse-logi1.png",
+    "ProductTypeId": 5,
+    "ProductBrandId": 2
+  },
+  {
+    "Name": "Razer DeathAdder V2",
+    "Description": "High-precision gaming mouse with customizable buttons and RGB lighting.",
+    "Price": 69.99,
+    "PictureUrl": "images/products/mouse-razer1.png",
+    "ProductTypeId": 5,
+    "ProductBrandId": 9
+  },
+  {
+    "Name": "JBL Flip 6",
+    "Description": "Portable Bluetooth speaker with powerful sound and IP67 waterproof rating.",
+    "Price": 119.99,
+    "PictureUrl": "images/products/speaker-jbl1.png",
+    "ProductTypeId": 6,
+    "ProductBrandId": 10
+  },
+  {
+    "Name": "Sony SRS-XB23",
+    "Description": "Extra bass wireless speaker with 12-hour battery life and compact design.",
+    "Price": 89.99,
+    "PictureUrl": "images/products/speaker-sony1.png",
+    "ProductTypeId": 6,
+    "ProductBrandId": 7
+  },
+  {
+    "Name": "Samsung T7 Portable SSD",
+    "Description": "High-speed external SSD with USB 3.2 Gen 2 and 1050MB/s read speeds.",
+    "Price": 109.99,
+    "PictureUrl": "images/products/ssd-samsung1.png",
+    "ProductTypeId": 7,
+    "ProductBrandId": 3
+  },
+  {
+    "Name": "WD My Passport SSD",
+    "Description": "Compact and durable external SSD with hardware encryption and fast performance.",
+    "Price": 119.99,
+    "PictureUrl": "images/products/ssd-wd1.png",
+    "ProductTypeId": 7,
+    "ProductBrandId": 8
+  }
+]
