@@ -10,8 +10,8 @@ namespace Core.Specifications
     {
         public ProductsWithTypesAndBrandsSpecification()
         {
-            AddInclude(x => x.ProductType ?? new ProductType());
-            AddInclude(x => x.ProductBrand ?? new ProductBrand());
+            AddInclude(x => x.ProductType);
+            AddInclude(x => x.ProductBrand);
         }
 
         public ProductsWithTypesAndBrandsSpecification(int id)
