@@ -10,6 +10,7 @@ namespace Core.Specifications
     {
         public BaseSpecifications()
         {
+            Criteria = x => true; // just doing this to avoid warning about not null Criteria
         }
 
         public BaseSpecifications(Expression<Func<T, bool>> criteria)
