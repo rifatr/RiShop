@@ -1,13 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Infra.Data;
 using Core.Entities;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Core.Interfaces;
 using Core.Specifications;
+using API.Dtos;
 
 namespace API.Controllers
 {
@@ -20,19 +15,42 @@ namespace API.Controllers
         private readonly IGenericRepository<ProductType> _productTypeRepository = productTypesRepo;
 
         [HttpGet]
-        public async Task<ActionResult<List<Product>>> GetProducts()
+        public async Task<ActionResult<List<ProductDto>>> GetProducts()
         {
             var specifications = new ProductsWithTypesAndBrandsSpecification();
             var products = await _productRepository.ListEntityWithSpecificationAsync(specifications);
 
-            return Ok(products);
+            return products
+                .Select(product =>
+                    new ProductDto
+                    {
+                        Id = product.Id,
+                        Name = product.Name,
+                        Description = product.Description,
+                        Price = product.Price,
+                        PictureUrl = product.PictureUrl,
+                        ProductBrand = product.ProductBrand.Name,
+                        ProductType = product.ProductType.Name
+                    })
+                .ToList();
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Product>> GetProduct(int id)
+        public async Task<ActionResult<ProductDto>> GetProduct(int id)
         {
             var specifications = new ProductsWithTypesAndBrandsSpecification(id);
-            return await _productRepository.GetEntityWithSpecification(specifications);
+            var product = await _productRepository.GetEntityWithSpecification(specifications);
+
+            return new ProductDto
+                {
+                    Id = product.Id,
+                    Name = product.Name,
+                    Description = product.Description,
+                    Price = product.Price,
+                    PictureUrl = product.PictureUrl,
+                    ProductBrand = product.ProductBrand.Name,
+                    ProductType = product.ProductType.Name
+                };
         }
 
         [HttpGet("brands")]
