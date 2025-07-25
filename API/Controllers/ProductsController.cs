@@ -3,16 +3,22 @@ using Microsoft.AspNetCore.Mvc;
 using Core.Interfaces;
 using Core.Specifications;
 using API.Dtos;
+using AutoMapper;
 
 namespace API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class ProductsController(IGenericRepository<Product> productsRepo, IGenericRepository<ProductBrand> productBrandsRepo, IGenericRepository<ProductType> productTypesRepo) : ControllerBase
+    public class ProductsController(
+        IGenericRepository<Product> productsRepo,
+        IGenericRepository<ProductBrand> productBrandsRepo,
+        IGenericRepository<ProductType> productTypesRepo,
+        IMapper mapper) : ControllerBase
     {
         private readonly IGenericRepository<Product> _productRepository = productsRepo;
         private readonly IGenericRepository<ProductBrand> _productBrandRepository = productBrandsRepo;
         private readonly IGenericRepository<ProductType> _productTypeRepository = productTypesRepo;
+        private readonly IMapper _mapper = mapper;
 
         [HttpGet]
         public async Task<ActionResult<List<ProductDto>>> GetProducts()
@@ -21,17 +27,7 @@ namespace API.Controllers
             var products = await _productRepository.ListEntityWithSpecificationAsync(specifications);
 
             return products
-                .Select(product =>
-                    new ProductDto
-                    {
-                        Id = product.Id,
-                        Name = product.Name,
-                        Description = product.Description,
-                        Price = product.Price,
-                        PictureUrl = product.PictureUrl,
-                        ProductBrand = product.ProductBrand.Name,
-                        ProductType = product.ProductType.Name
-                    })
+                .Select(_mapper.Map<Product, ProductDto>)
                 .ToList();
         }
 
