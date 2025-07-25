@@ -49,6 +49,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseRouting();
+app.UseStaticFiles();
 
 var summaries = new[]
 {
