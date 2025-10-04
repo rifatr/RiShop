@@ -2,6 +2,7 @@ using API.Helpers;
 using Core.Interfaces;
 using Infra.Data;
 using Microsoft.EntityFrameworkCore;
+using API.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -44,11 +45,11 @@ app.MapControllers();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    // app.UseDeveloperExceptionPage();
     app.UseSwagger();
     app.UseSwaggerUI();
 }
 
+app.UseMiddleware<ExceptionMiddleware>();
 app.UseStatusCodePagesWithReExecute("/error/{0}");
 app.UseHttpsRedirection();
 app.UseRouting();
