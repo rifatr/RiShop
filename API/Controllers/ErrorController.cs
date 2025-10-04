@@ -8,7 +8,7 @@ using API.Errors;
 namespace API.Controllers
 {
     [Route("error/{statusCode}")]
-    public class ErrorController: BaseApiController
+    public class ErrorController : BaseApiController
     {
         [HttpGet]
         public IActionResult Error(int statusCode)

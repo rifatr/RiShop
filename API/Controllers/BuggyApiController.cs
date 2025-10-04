@@ -8,7 +8,7 @@ using API.Errors;
 
 namespace API.Controllers
 {
-    public class BuggyApiController(StoreContext context): BaseApiController
+    public class BuggyApiController(StoreContext context) : BaseApiController
     {
         private readonly StoreContext _context = context;
 
