@@ -8,9 +8,9 @@ using API.Errors;
 namespace API.Controllers
 {
     [Route("error/{statusCode}")]
+    [ApiExplorerSettings(IgnoreApi = true)]
     public class ErrorController : BaseApiController
     {
-        [HttpGet]
         public IActionResult Error(int statusCode)
         {
             return new ObjectResult(new ApiResponse(statusCode));
