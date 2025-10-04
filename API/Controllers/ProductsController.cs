@@ -13,7 +13,7 @@ namespace API.Controllers
         IGenericRepository<Product> productsRepo,
         IGenericRepository<ProductBrand> productBrandsRepo,
         IGenericRepository<ProductType> productTypesRepo,
-        IMapper mapper) : ControllerBase
+        IMapper mapper) : BaseApiController
     {
         private readonly IGenericRepository<Product> _productRepository = productsRepo;
         private readonly IGenericRepository<ProductBrand> _productBrandRepository = productBrandsRepo;
