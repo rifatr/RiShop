@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Infra.Data;
+using API.Errors;
 
 namespace API.Controllers
 {
@@ -14,7 +15,7 @@ namespace API.Controllers
         [HttpGet("not-found")]
         public ActionResult GetNotFound()
         {
-            return NotFound();
+            return NotFound(new ApiResponse(404));
         }
 
         [HttpGet("server-error")] // null exception
@@ -23,19 +24,19 @@ namespace API.Controllers
             var thing = _context.Products.Find(150);
             var thingToReturn = thing.ToString();
 
-            return NotFound();
+            return Ok();
         }
 
         [HttpGet("bad-request")]
         public ActionResult GetBadRequest()
         {
-            return BadRequest();
+            return BadRequest(new ApiResponse(400));
         }
         
         [HttpGet("bad-request/{id}")] // validation error
         public ActionResult GetBadRequest(int id)
         {
-            return BadRequest();
+            return Ok();
         }
     }
 }
