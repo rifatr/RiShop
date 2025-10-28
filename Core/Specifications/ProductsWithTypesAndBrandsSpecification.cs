@@ -14,6 +14,34 @@ namespace Core.Specifications
             AddInclude(x => x.ProductBrand);
         }
 
+        public ProductsWithTypesAndBrandsSpecification(string sort)
+        {
+            AddInclude(x => x.ProductType);
+            AddInclude(x => x.ProductBrand);
+
+            if (!string.IsNullOrWhiteSpace(sort))
+            {
+                switch (sort)
+                {
+                    case "priceAsc":
+                        AddOrderBy(x => x.Price);
+                        break;
+                    case "priceDesc":
+                        AddOrderByDesc(x => x.Price);
+                        break;
+                    case "nameAsc":
+                        AddOrderBy(x => x.Name);
+                        break;
+                    case "nameDesc":
+                        AddOrderByDesc(x => x.Name);
+                        break;
+                    default:
+                        AddOrderBy(x => x.Id);
+                        break;
+                }
+            }
+        }
+
         public ProductsWithTypesAndBrandsSpecification(int id)
             : base(x => x.Id == id)
         {
