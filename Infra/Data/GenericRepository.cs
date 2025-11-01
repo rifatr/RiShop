@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Core.Entities;
 using Core.Interfaces;
 using Core.Specifications;
@@ -31,6 +27,11 @@ namespace Infra.Data
         public async Task<IReadOnlyList<T>> ListEntityWithSpecificationAsync(ISpecifications<T> specifications)
         {
             return await ApplySpecification(specifications).ToListAsync();
+        }
+
+        public async Task<int> CountAsync(ISpecifications<T> specifications)
+        {
+            return await ApplySpecification(specifications).CountAsync();
         }
 
         private IQueryable<T> ApplySpecification(ISpecifications<T> specifications)

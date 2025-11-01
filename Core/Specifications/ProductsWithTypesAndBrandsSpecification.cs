@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Core.Entities;
 
 namespace Core.Specifications
@@ -14,18 +10,19 @@ namespace Core.Specifications
             AddInclude(x => x.ProductBrand);
         }
 
-        public ProductsWithTypesAndBrandsSpecification(string sort, int? brandId, int? typeId)
+        public ProductsWithTypesAndBrandsSpecification(ProductSpecParams productParams)
             : base (x =>
-                (!brandId.HasValue || x.ProductBrandId == brandId) &&
-                (!typeId.HasValue  || x.ProductTypeId  == typeId)
+                (!productParams.BrandId.HasValue || x.ProductBrandId == productParams.BrandId) &&
+                (!productParams.TypeId.HasValue  || x.ProductTypeId  == productParams.TypeId)
             )
         {
             AddInclude(x => x.ProductType);
             AddInclude(x => x.ProductBrand);
+            ApplyPagination(productParams.PageSize, productParams.PageSize * (productParams.PageIndex - 1));
 
-            if (!string.IsNullOrWhiteSpace(sort))
+            if (!string.IsNullOrWhiteSpace(productParams.Sort))
             {
-                switch (sort)
+                switch (productParams.Sort)
                 {
                     case "priceAsc":
                         AddOrderBy(x => x.Price);
