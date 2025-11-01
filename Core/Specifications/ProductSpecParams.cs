@@ -17,5 +17,12 @@ namespace Core.Specifications
 
         public int? BrandId { get; set; }
 
+        private string? _search;
+        public string? Search
+        {
+            get => _search;
+            set => _search = !string.IsNullOrEmpty(value) ? value.ToLower() : null;
+        }
+
     }
 }
