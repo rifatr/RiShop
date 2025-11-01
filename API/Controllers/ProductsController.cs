@@ -23,9 +23,10 @@ namespace API.Controllers
         private readonly IMapper _mapper = mapper;
 
         [HttpGet]
-        public async Task<ActionResult<IReadOnlyList<ProductDto>>> GetProducts(string sort)
+        public async Task<ActionResult<IReadOnlyList<ProductDto>>> GetProducts(
+            string sort, int? brandId, int? typeId)
         {
-            var specifications = new ProductsWithTypesAndBrandsSpecification(sort);
+            var specifications = new ProductsWithTypesAndBrandsSpecification(sort, brandId, typeId);
             var products = await _productRepository.ListEntityWithSpecificationAsync(specifications);
 
             return Ok(_mapper.Map<IReadOnlyList<Product>, IReadOnlyList<ProductDto>>(products));
