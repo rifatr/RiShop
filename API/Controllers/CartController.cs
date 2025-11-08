@@ -12,7 +12,7 @@ namespace API.Controllers
         [HttpGet]
         public async Task<ActionResult<CustomerCart>> GetCartById(string cartId)
         {
-            var cart = _cartRespository.GetCartAsync(cartId);
+            var cart = await _cartRespository.GetCartAsync(cartId);
 
             return cart == null ? NotFound(new ApiResponse(404)) : Ok(cart);
         }
