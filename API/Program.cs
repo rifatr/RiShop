@@ -6,37 +6,22 @@ using API.Middleware;
 using API.Errors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.OpenApi.Models;
+using API.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
+
+builder.Services.AddAutoMapper(typeof(MappingProfiles));
 builder.Services.AddControllers();
-builder.Services.AddScoped<IProductRepository, ProductRepository>();
-builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 builder.Services.AddDbContext<StoreContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"))
 );
-builder.Services.AddAutoMapper(typeof(MappingProfiles));
-builder.Services.Configure<ApiBehaviorOptions>(options =>
-{
-    options.InvalidModelStateResponseFactory = actionContext =>
-    {
-        var errors = actionContext.ModelState
-            .Where(e => e.Value.Errors.Count > 0)
-            .SelectMany(e => e.Value.Errors)
-            .Select(e => e.ErrorMessage)
-            .ToArray();
 
-        var errorResponse = new ApiValidationErrorResponse
-        {
-            Errors = errors
-        };
+builder.Services.AddApplicationServices();
 
-        return new BadRequestObjectResult(errorResponse);
-    };
-});
+// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddSwaggerGen(c => // need to explore more
 {
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "RiShop API", Version = "V1" });
