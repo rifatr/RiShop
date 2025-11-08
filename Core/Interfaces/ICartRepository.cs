@@ -9,7 +9,7 @@ namespace Core.Interfaces
     public interface ICartRepository
     {
         Task<CustomerCart> GetCartAsync(string cartId);
-        Task<CustomerCart> UpdateCartAsync(CustomerCart customerCart);
+        Task<CustomerCart> CreateOrUpdateCartAsync(CustomerCart customerCart);
         Task<bool> DeleteCartAsync(string cartId);
     }
 }

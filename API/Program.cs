@@ -1,12 +1,10 @@
 using API.Helpers;
-using Core.Interfaces;
 using Infra.Data;
 using Microsoft.EntityFrameworkCore;
 using API.Middleware;
-using API.Errors;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.OpenApi.Models;
 using API.Extensions;
+using StackExchange.Redis;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,11 +16,14 @@ builder.Services.AddControllers();
 builder.Services.AddDbContext<StoreContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"))
 );
+builder.Services.AddSingleton(c =>
+{
+    var config = ConfigurationOptions.Parse(builder.Configuration.GetConnectionString("Redis"), true);
+    return ConnectionMultiplexer.Connect(config);
+});
 
 builder.Services.AddApplicationServices();
-
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddSwaggerGen(c => // need to explore more
+builder.Services.AddSwaggerGen(c => // need to explore more Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 {
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "RiShop API", Version = "V1" });
 });
@@ -30,7 +31,9 @@ builder.Services.AddCors(opt =>
 {
     opt.AddPolicy("CorsPolicy", policy =>
     {
-        policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:5043");
+        policy.AllowAnyHeader()
+              .AllowAnyMethod()
+              .WithOrigins("http://localhost:5043");
     });
 });
 
