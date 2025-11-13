@@ -33,7 +33,7 @@ builder.Services.AddCors(opt =>
     {
         policy.AllowAnyHeader()
               .AllowAnyMethod()
-              .WithOrigins("http://localhost:5043");
+              .WithOrigins("https://localhost:4200");
     });
 });
 
@@ -73,10 +73,11 @@ app.UseMiddleware<ExceptionMiddleware>();
 app.UseStatusCodePagesWithReExecute("/error/{0}");
 app.UseHttpsRedirection();
 app.UseRouting();
-app.UseStaticFiles();
 
 app.UseCors("CorsPolicy");
 
+app.UseStaticFiles();
 app.MapControllers();
+
 
 app.Run();
