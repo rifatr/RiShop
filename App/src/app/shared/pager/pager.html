@@ -1,0 +1,22 @@
+@if (totalCount && pageSize) {
+    <nav aria-label="...">
+        <ul class="pagination">
+            <li class="page-item page-link" 
+                [class.disabled]="currentPageNumber == 1"
+                (click)="onPagerChanged(currentPageNumber - 1)"
+        >Previous</li>
+
+            @for (pageNumber of getDummyArray(); track $index) {
+                <li class="page-item page-link"
+                    [class.active]="$index == currentPageNumber - 1"
+                    (click)="onPagerChanged($index + 1)"
+                >{{$index + 1}}</li>
+            }
+
+            <li class="page-item page-link" 
+                [class.disabled]="currentPageNumber == getDummyArray().length"
+                (click)="onPagerChanged(currentPageNumber + 1)"
+            >Next</li>
+        </ul>
+    </nav>
+}

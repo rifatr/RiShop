@@ -1,0 +1,20 @@
+@if (pageNumber != null && pageSize != null && totalCount != null) {
+    <header>
+        @if (totalCount > 0) {
+            <span>Showing
+                <strong>{{ pageSize * (pageNumber - 1) + 1 }} -
+                    {{ pageSize * pageNumber > totalCount 
+                        ? totalCount 
+                        : pageNumber * pageSize 
+                    }}
+                </strong>
+                of
+                <strong>{{ totalCount }}</strong>
+                Results
+            </span>
+        } 
+        @else {
+            <span>There are no results found</span>
+        }
+    </header>
+}
