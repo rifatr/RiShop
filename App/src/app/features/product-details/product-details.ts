@@ -21,7 +21,7 @@ export class ProductDetails {
 
   loadProduct() {
     const maybeId = this.route.snapshot.paramMap.get('id');
-    if (maybeId != null && !isNaN(+maybeId)) {
+    if (maybeId != null) {
       const id = +maybeId;
       this.shopService.getProduct(id).subscribe({
         next: product => this.product = product,
