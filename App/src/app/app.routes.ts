@@ -3,7 +3,6 @@ import { Home } from './home/home';
 
 export const routes: Routes = [
     {path: '', component: Home, data: {breadcrumb: 'Home' }},
-    {path: 'shop', loadComponent: () => import('./features/shop/shop').then(m => m.Shop)},
-    {path: 'shop/:id', loadComponent: () => import('./features/product-details/product-details').then(m => m.ProductDetails)},
+    {path: 'shop', loadChildren: () => import('./features/shop/shop.routes').then(m => m.SHOP_ROUTES)},
     {path: '**', redirectTo: '', pathMatch: 'full'},
 ];

@@ -6,6 +6,9 @@
             </div>
             <div class="col-3">
                 <xng-breadcrumb>
+                    <ng-container *xngBreadcrumbItem="let bc">
+                        {{ bc | titlecase }}
+                    </ng-container>
                 </xng-breadcrumb>
             </div>
         </div>

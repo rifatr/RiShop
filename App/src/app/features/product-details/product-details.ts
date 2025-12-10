@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { Product } from '../../shared/models/product';
-import { ShopService } from '../shop/service/shop';
+import { ShopService } from '../shop/shop.service';
 import { ActivatedRoute } from '@angular/router';
 import { CurrencyPipe } from '@angular/common';
+import { BreadcrumbService } from 'xng-breadcrumb';
 
 @Component({
   selector: 'app-product-details',
@@ -13,7 +14,7 @@ import { CurrencyPipe } from '@angular/common';
 export class ProductDetails {
   product?: Product;
 
-  constructor(private shopService: ShopService, private route: ActivatedRoute) {}
+  constructor(private shopService: ShopService, private route: ActivatedRoute, private bcService: BreadcrumbService) {}
 
   ngOnInit(): void {
     this.loadProduct();
@@ -24,7 +25,10 @@ export class ProductDetails {
     if (maybeId != null) {
       const id = +maybeId;
       this.shopService.getProduct(id).subscribe({
-        next: product => this.product = product,
+        next: product => {
+          this.product = product
+          this.bcService.set('@productDetails', product.name.substring(0, 15) + (product.name.length > 15 ? '...' : ''));
+        },
         error: error => console.log(error)
       })
     }
