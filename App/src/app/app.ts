@@ -6,7 +6,7 @@ import { SectionHeader } from "./core/section-header/section-header";
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, TopBar, SectionHeader],
+  imports: [ RouterOutlet, TopBar, SectionHeader ],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
