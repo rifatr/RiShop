@@ -1,65 +1,67 @@
 <div class="container">
-    <div class="row">
-        <section class="col-3">
-            <h5 class="mt-2 px-3 py-2">Sort</h5>
-            <select class="form-select mb-4" (change)="onSortSelected($event)">
-                @for (sort of sortOptions; track sort.value) {
-                    <option [value]="sort.value">{{sort.name}}</option>
-                }
-            </select>
-            <h5 class="px-3 py-2">Brands</h5>
-            <ul class="list-group mb-2">
-                @for (brand of brands; track brand.id) {
-                    <li class="list-group-item"
-                        [class.active]="brand.id === shopParams.brandId"
-                        [value]="brand.id"
-                        (click)="onBrandSelected(brand.id)"
-                    >{{brand.name}}</li>
-                }
-            </ul>
-            <h5 class="px-3 py-2 mb-3">Types</h5>
-            <ul class="list-group">
-                @for (productType of productTypes; track productType.id) {
-                    <li class="list-group-item"
-                        [class.active]="productType.id === shopParams.productTypeId"
-                        [value]="productType.id"
-                        (click)="onProductTypeSelected(productType.id)"
-                    >{{productType.name}}</li>
-                }
-            </ul>
-        </section>
-        <section class="col-9">
-            <div class="d-flex justify-content-between align-items-center pb-2">
-                <app-paging-header 
-                    [pageNumber]="shopParams.pageNumber"
-                    [pageSize]="shopParams.pageSize"
-                    [totalCount]="totalCount"
-                ></app-paging-header>
-
-                <div class="d-flex mt-2">
-                    <input (keyup.enter)="onSearch()" type="text" placeholder="Search" class="form-control me-2" #search>
-                    <button (click)="onSearch()" class="btn btn-outline-secondary mx-2">Search</button>
+    @if (brands.length > 0 && productTypes.length > 0) {
+        <div class="row">
+            <section class="col-3">
+                <h5 class="mt-2 px-3 py-2">Sort</h5>
+                <select class="form-select mb-4" (change)="onSortSelected($event)">
+                    @for (sort of sortOptions; track sort.value) {
+                        <option [value]="sort.value">{{sort.name}}</option>
+                    }
+                </select>
+                <h5 class="px-3 py-2">Brands</h5>
+                <ul class="list-group mb-2">
+                    @for (brand of brands; track brand.id) {
+                        <li class="list-group-item"
+                            [class.active]="brand.id === shopParams.brandId"
+                            [value]="brand.id"
+                            (click)="onBrandSelected(brand.id)"
+                        >{{brand.name}}</li>
+                    }
+                </ul>
+                <h5 class="px-3 py-2 mb-3">Types</h5>
+                <ul class="list-group">
+                    @for (productType of productTypes; track productType.id) {
+                        <li class="list-group-item"
+                            [class.active]="productType.id === shopParams.productTypeId"
+                            [value]="productType.id"
+                            (click)="onProductTypeSelected(productType.id)"
+                        >{{productType.name}}</li>
+                    }
+                </ul>
+            </section>
+            <section class="col-9">
+                <div class="d-flex justify-content-between align-items-center pb-2">
+                    <app-paging-header 
+                        [pageNumber]="shopParams.pageNumber"
+                        [pageSize]="shopParams.pageSize"
+                        [totalCount]="totalCount"
+                    ></app-paging-header>
+    
+                    <div class="d-flex mt-2">
+                        <input (keyup.enter)="onSearch()" type="text" placeholder="Search" class="form-control me-2" #search>
+                        <button (click)="onSearch()" class="btn btn-outline-secondary mx-2">Search</button>
+                    </div>
                 </div>
-            </div>
-
-            <div class="row row-cols-3 g-3 mb-5">
-                @for (product of products; track product.id) {
-                    <div class="col">
-                        <app-product-item [product]="product"></app-product-item>
+    
+                <div class="row row-cols-3 g-3 mb-5">
+                    @for (product of products; track product.id) {
+                        <div class="col">
+                            <app-product-item [product]="product"></app-product-item>
+                        </div>
+                    }
+                </div>
+    
+                @if (totalCount > 0) {
+                    <div class="d-flex justify-content-center">
+                        <app-pager
+                            [totalCount]="totalCount"
+                            [pageSize]="shopParams.pageSize"
+                            [currentPageNumber]="shopParams.pageNumber"
+                            (onPageChanged)="onPageNumberChanged($event)"
+                        ></app-pager>
                     </div>
                 }
-            </div>
-
-            @if (totalCount > 0) {
-                <div class="d-flex justify-content-center">
-                    <app-pager
-                        [totalCount]="totalCount"
-                        [pageSize]="shopParams.pageSize"
-                        [currentPageNumber]="shopParams.pageNumber"
-                        (onPageChanged)="onPageNumberChanged($event)"
-                    ></app-pager>
-                </div>
-            }
-        </section>
-    </div>
+            </section>
+        </div>
+    }
 </div>

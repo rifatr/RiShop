@@ -1,15 +1,15 @@
-@if (title$ | async; as title) {
-    @if (title && title != "Home") {
+@if (titleBreadcrumb$ | async; as title) {
+    @if (title && title.label != "Home") {
         <section class="py-5" style="margin-top: 105px;">
             <div class="container">
                 <div class="row d-flex align-items-center">
                     <div class="col-9">
-                        <h1>{{title | titlecase}}</h1>
+                        <h1>{{title.label | titlecase}}</h1>
                     </div>
                     <div class="col-3">
                         <xng-breadcrumb>
                             <ng-container *xngBreadcrumbItem="let bc">
-                                {{ bc | titlecase }}
+                                {{ (bc.substring(0, 15) + (bc.length > 15 ? "..." : "")) | titlecase }}
                             </ng-container>
                         </xng-breadcrumb>
                     </div>

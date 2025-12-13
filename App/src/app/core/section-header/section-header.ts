@@ -10,21 +10,14 @@ import { map, Observable } from 'rxjs';
   styleUrl: './section-header.scss',
 })
 export class SectionHeader {
-  title$: Observable<string | null>;
+  titleBreadcrumb$: Observable<any>;
 
   constructor(public bcService: BreadcrumbService) {
-    this.title$ = bcService.breadcrumbs$.pipe(
+    this.titleBreadcrumb$ = bcService.breadcrumbs$.pipe(
       map(bc => {
         if (bc.length === 0) return null;
 
-        const last = bc[bc.length - 1].label;
-        if (last === null) return null;
-
-        return typeof last === 'string'
-          ? last
-          : typeof last === 'function'
-              ? last()
-              : null;
+        return bc[bc.length - 1];
       })
     );
   }

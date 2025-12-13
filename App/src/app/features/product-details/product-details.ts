@@ -14,7 +14,9 @@ import { BreadcrumbService } from 'xng-breadcrumb';
 export class ProductDetails {
   product?: Product;
 
-  constructor(private shopService: ShopService, private route: ActivatedRoute, private bcService: BreadcrumbService) {}
+  constructor(private shopService: ShopService, private route: ActivatedRoute, private bcService: BreadcrumbService) {
+    bcService.set('@productDetails', " "); // doesn't load the section title and breadcrumb until api call finishes
+  }
 
   ngOnInit(): void {
     this.loadProduct();
@@ -27,7 +29,7 @@ export class ProductDetails {
       this.shopService.getProduct(id).subscribe({
         next: product => {
           this.product = product
-          this.bcService.set('@productDetails', product.name.substring(0, 15) + (product.name.length > 15 ? '...' : ''));
+          this.bcService.set('@productDetails', product.name);
         },
         error: error => console.log(error)
       })

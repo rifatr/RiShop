@@ -5,6 +5,7 @@ import { routes } from './app.routes';
 import { provideToastr } from 'ngx-toastr';
 import { errorInterceptor } from './core/interceptors/error-interceptor';
 import { provideAnimations } from '@angular/platform-browser/animations';
+import { loadingInterceptor } from './core/interceptors/loading-interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -12,7 +13,7 @@ export const appConfig: ApplicationConfig = {
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     provideHttpClient(
-      withInterceptors([errorInterceptor])
+      withInterceptors([errorInterceptor, loadingInterceptor])
     ),
     provideAnimations(), // need for Toastr
     provideToastr({
