@@ -14,10 +14,15 @@
   </nav>
 
   <div class="d-flex align-items-center">
-    <a class="position-relative">
+    <a class="position-relative" routerLink="/cart">
         <i class="fa fa-shopping-cart fa-2x me-5 text-dark"></i>
-        <div class="cart-no">5</div>
-    </a>
+        <div class="cart-no">
+          @if (cartService.cartSource$ | async; as cart) {
+            {{getTotalItemCount(cart.items)}}
+          }
+          @else {0}
+        </div>
+      </a>
     <a class="btn btn-outline-primary me-3" routerLink="/shop">Login/SignUp</a>
   </div>
 </div>

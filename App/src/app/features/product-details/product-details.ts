@@ -4,6 +4,7 @@ import { ShopService } from '../shop/shop.service';
 import { ActivatedRoute } from '@angular/router';
 import { CurrencyPipe } from '@angular/common';
 import { BreadcrumbService } from 'xng-breadcrumb';
+import { CartService } from '../cart/cart.service';
 
 @Component({
   selector: 'app-product-details',
@@ -14,7 +15,7 @@ import { BreadcrumbService } from 'xng-breadcrumb';
 export class ProductDetails {
   product?: Product;
 
-  constructor(private shopService: ShopService, private route: ActivatedRoute, private bcService: BreadcrumbService) {
+  constructor(private shopService: ShopService, private route: ActivatedRoute, private bcService: BreadcrumbService, private cartService: CartService) {
     bcService.set('@productDetails', " "); // doesn't load the section title and breadcrumb until api call finishes
   }
 
@@ -33,6 +34,25 @@ export class ProductDetails {
         },
         error: error => console.log(error)
       })
+    }
+  }
+
+  getProductQuantityInCart() {
+    const cart = this.cartService.getCurrentCart();
+    return cart?.items.find(item => item.id === this.product?.id)?.quantity ?? 0;
+  }
+
+  incrementQuantity(productId: number) {
+    this.cartService.incrementExistingProductQuantity(productId);
+  }
+
+  decrementQuantity(productId: number, quantity: number = 1) {
+    this.cartService.decrementQuantityOrRemoveProduct(productId, quantity);
+  }
+
+  onClickAddToCart() {
+    if (this.product) {
+      this.cartService.addItemInCart(this.product);
     }
   }
 }

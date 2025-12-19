@@ -4,7 +4,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 @Injectable({
   providedIn: 'root',
 })
-export class Busy {
+export class BusyService {
   isBusy: boolean = false;
 
   constructor(private spinnerService: NgxSpinnerService) {}
