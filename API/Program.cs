@@ -5,6 +5,10 @@ using API.Middleware;
 using Microsoft.OpenApi.Models;
 using API.Extensions;
 using StackExchange.Redis;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Infra.Identity;
+using Microsoft.AspNetCore.Identity;
+using Core.Identity.User;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,6 +27,7 @@ builder.Services.AddSingleton<IConnectionMultiplexer>(c =>
 });
 
 builder.Services.AddApplicationServices();
+builder.Services.AddIdentityServices(builder.Configuration);
 builder.Services.AddSwaggerGen(c => // need to explore more Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 {
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "RiShop API", Version = "V1" });
@@ -47,8 +52,14 @@ using (var scope = app.Services.CreateScope())
     try
     {
         var context = services.GetRequiredService<StoreContext>();
+        var identityContext = services.GetRequiredService<AppIdentityDbContext>();
+        var userManager = services.GetRequiredService<UserManager<AppUser>>();
+
         await context.Database.MigrateAsync();
+        await identityContext.Database.MigrateAsync();
+
         await StoreContextSeed.SeedAsync(context, loggerFactory);
+        await AppIdentityDbContextSeed.SeedUsersAsync(userManager);
     }
     catch (Exception ex)
     {
@@ -74,9 +85,13 @@ app.UseStatusCodePagesWithReExecute("/error/{0}");
 app.UseHttpsRedirection();
 app.UseRouting();
 
+app.UseStaticFiles();
+
 app.UseCors("CorsPolicy");
 
-app.UseStaticFiles();
+app.UseAuthentication();
+app.UseAuthorization();
+
 app.MapControllers();
 
 
