@@ -59,6 +59,10 @@ public class AccountController(
     [HttpPost("signup")]
     public async Task<ActionResult<UserDto>> SingUp(SignUpDto signUpDto)
     {
+        if(CheckIfEmailExistsAlrady(signUpDto.Email).Result.Value)
+        {
+            return new BadRequestObjectResult(new ApiValidationErrorResponse{Errors = ["This email already exists."]});
+        }
         var user = new AppUser
         {
             DisplayName = signUpDto.DisplayName,

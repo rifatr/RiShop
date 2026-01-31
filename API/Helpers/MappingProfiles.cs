@@ -19,6 +19,10 @@ namespace API.Helpers
                 .ForMember(destination => destination.Token, options => options.MapFrom<UserTokenResolver>()); 
 
             CreateMap<Address, AddressDto>().ReverseMap();
+
+            CreateMap<CartItemDto, CartItem>();
+            
+            CreateMap<CustomerCartDto, CustomerCart>();
         }
     }
 }

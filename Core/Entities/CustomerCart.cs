@@ -1,17 +1,8 @@
 namespace Core.Entities
 {
-    public class CustomerCart
+    public class CustomerCart(string id)
     {
-        public CustomerCart()
-        {
-        }
-
-        public CustomerCart(string id)
-        {
-            Id = id;
-        }
-
-        public string Id { get; set; }
+        public string Id { get; set; } = id;
         public List<CartItem> Items { get; set; } = [];
     }
 }

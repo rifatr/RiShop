@@ -12,8 +12,6 @@ using Core.Identity.User;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddEndpointsApiExplorer();
-
 builder.Services.AddAutoMapper(typeof(MappingProfiles));
 builder.Services.AddControllers();
 builder.Services.AddDbContext<StoreContext>(options =>
@@ -27,10 +25,8 @@ builder.Services.AddSingleton<IConnectionMultiplexer>(c =>
 
 builder.Services.AddApplicationServices();
 builder.Services.AddIdentityServices(builder.Configuration);
-builder.Services.AddSwaggerGen(c => // need to explore more Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-{
-    c.SwaggerDoc("v1", new OpenApiInfo { Title = "RiShop API", Version = "V1" });
-});
+builder.Services.AddSwaggerDocumentation();
+
 builder.Services.AddCors(opt =>
 {
     opt.AddPolicy("CorsPolicy", policy =>
@@ -69,14 +65,7 @@ using (var scope = app.Services.CreateScope())
 
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI(c => // need to explore more
-    {
-        c.SwaggerEndpoint("/swagger/v1/swagger.json", "RiShop API v1");
-    });
-}
+app.UseSwaggerDocumentation();
 
 // And in your middleware configuration
 app.UseMiddleware<ExceptionMiddleware>();
