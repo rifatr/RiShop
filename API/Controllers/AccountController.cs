@@ -9,7 +9,6 @@ using Core.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers;
 
@@ -33,12 +32,7 @@ public class AccountController(
         if(user == null)
             return BadRequest(new ApiResponse(400, "No user found"));
 
-        return new UserDto
-        {
-            DisplayName = user.DisplayName,
-            Email = user.Email,
-            Token = _tokenService.CreateToken(user)
-        };
+        return _mapper.Map<AppUser, UserDto>(user);
     }
 
     [HttpGet("emailexists")]
@@ -59,12 +53,7 @@ public class AccountController(
         if(!checkPassword.Succeeded)
             return Unauthorized(new ApiResponse(401));
 
-        return new UserDto
-        {
-            DisplayName = user.DisplayName,
-            Email = user.Email,
-            Token = _tokenService.CreateToken(user)
-        };
+        return _mapper.Map<AppUser, UserDto>(user);
     }
 
     [HttpPost("signup")]
@@ -82,12 +71,7 @@ public class AccountController(
         if(!result.Succeeded)
             return BadRequest(new ApiResponse(400));
 
-        return new UserDto
-        {
-            DisplayName = user.DisplayName,
-            Email = user.Email,
-            Token = _tokenService.CreateToken(user)
-        };
+        return _mapper.Map<AppUser, UserDto>(user);
     }
 
     [HttpGet("currentuseraddress")]
