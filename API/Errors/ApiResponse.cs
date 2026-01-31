@@ -1,14 +1,11 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
 namespace API.Errors
 {
     public class ApiResponse
     {
-        public ApiResponse(int statusCode, string message = null)
+        public ApiResponse(int statusCode, string? message = null)
         {
+            // Console.WriteLine($"Hello, C# Print! {statusCode} {message}");
+            // Console.WriteLine(Environment.StackTrace);
             StatusCode = statusCode;
             Message = message ?? GetDefaultErrorMessageForStatusCode(statusCode);
         }
@@ -16,7 +13,7 @@ namespace API.Errors
         public int StatusCode { get; set; }
         public string? Message { get; set; }
 
-        private string GetDefaultErrorMessageForStatusCode(int statusCode)
+        private static string? GetDefaultErrorMessageForStatusCode(int statusCode)
         {
             return statusCode switch
             {

@@ -1,12 +1,20 @@
 using Microsoft.AspNetCore.Mvc;
 using Infra.Data;
 using API.Errors;
+using Microsoft.AspNetCore.Authorization;
 
 namespace API.Controllers
 {
     public class BuggyApiController(StoreContext context) : BaseApiController
     {
         private readonly StoreContext _context = context;
+
+        [HttpGet("testauth")]
+        [Authorize]
+        public ActionResult<string> GetSecretTest()
+        {
+            return "This is secret";
+        }
 
         [HttpGet("not-found")]
         public ActionResult GetNotFound()

@@ -5,7 +5,6 @@ using API.Middleware;
 using Microsoft.OpenApi.Models;
 using API.Extensions;
 using StackExchange.Redis;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Infra.Identity;
 using Microsoft.AspNetCore.Identity;
 using Core.Identity.User;

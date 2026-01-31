@@ -6,6 +6,6 @@ namespace Core.Identity.User
     public class AppUser : IdentityUser
     {
         public required string DisplayName { get; set; }
-        public required Address Address { get; set; }
+        public Address? Address { get; set; }
     }
 }
